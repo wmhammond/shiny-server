@@ -1,0 +1,13 @@
+name: GTM_test
+title: GTM_test
+username:
+account: wmhammond
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 959741
+bundleId: 2127582
+url: https://wmhammond.shinyapps.io/GTM_test/
+when: 1559584072.93795
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: GTM.csv|GTM.RDS|GTM2.csv|data/GTM.RDS
