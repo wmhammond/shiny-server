@@ -1,7 +1,7 @@
 library(shiny)
 
 # which fields get saved 
-fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88")
+fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88", "porosity", "conduit.density")
 
 # which fields are mandatory
 fieldsMandatory <- c("group", "family", "species", "P50")
@@ -90,6 +90,9 @@ shinyApp(
                     checkboxInput("hydraulictraits", "Hydraulic Traits",FALSE),
                     uiOutput("conditionalInput"),
                     uiOutput("conditionalInput2"),
+                    checkboxInput("anatomicaltraits", "Anatomical Traits", FALSE),
+                    uiOutput("conditionalAnatomical1"),
+                    uiOutput("conditionalAnatomical2"),
                     actionButton("submit", "Submit", class = "btn-primary"),
                     shinyjs::hidden(
                         span(id = "submit_msg", "Submitting..."),
@@ -188,7 +191,7 @@ shinyApp(
                 DT::dataTableOutput("responsesTable"), br(),
             )
         })
-        ###
+        #hydraulic traits
         output$conditionalInput <- renderUI({
           if(input$hydraulictraits){
             textInput("P12", "P12 value:")
@@ -197,6 +200,18 @@ shinyApp(
         output$conditionalInput2 <- renderUI({
           if(input$hydraulictraits){
             textInput("P88", "P88 value:")
+          }
+        })
+        #anatomical traits
+        output$conditionalAnatomical1 <- renderUI({
+          if(input$anatomicaltraits){
+            selectInput("porosity", "Select Porosity:",
+                        c("diffuse-porosity", "ring-porosity", "semi-ring-porosity"))
+          }
+        })
+        output$conditionalAnatomical2 <- renderUI({
+          if(input$anatomicaltraits){
+            textInput("conduit.density", "Conduit density per mm^2:")
           }
         })
         
