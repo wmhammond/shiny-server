@@ -87,6 +87,9 @@ shinyApp(
                     textInput("species", labelMandatory("Species")),
                     textInput("P50", labelMandatory("P50")),
                     textInput("subspecies", "Subspecies"),
+                    checkboxInput("hydraulictraits", "Hydraulic Traits",FALSE),
+                    uiOutput("conditionalInput"),
+                    uiOutput("conditionalInput2"),
                     actionButton("submit", "Submit", class = "btn-primary"),
                     shinyjs::hidden(
                         span(id = "submit_msg", "Submitting..."),
@@ -108,16 +111,16 @@ shinyApp(
                 # column(6,
                 #        uiOutput("dataTableContainer")
                 # )
-            ),
-            tabPanel("Entered data"),
-            pageWithSidebar(
-                headerPanel("Data pending cleaning"),
-                sidebarPanel(
-                    actionButton("submit_another", "Submit another response")
-                ),
-                mainPanel = ("dataTableContainer")
             )
-            
+            # tabPanel("Entered data"),
+            # pageWithSidebar(
+            #     headerPanel("Data pending cleaning"),
+            #     sidebarPanel(
+            #         actionButton("submit_another", "Submit another response")
+            #     ),
+            #     mainPanel = ("dataTableContainer")
+            # )
+            # 
             
         ))),
     server = function(input, output, session) {
@@ -184,6 +187,17 @@ shinyApp(
                 downloadButton("downloadBtn", "Download responses"), br(), br(),
                 DT::dataTableOutput("responsesTable"), br(),
             )
+        })
+        ###
+        output$conditionalInput <- renderUI({
+          if(input$hydraulictraits){
+            textInput("P12", "P12 value:")
+          }
+        })
+        output$conditionalInput2 <- renderUI({
+          if(input$hydraulictraits){
+            textInput("P88", "P88 value:")
+          }
         })
         
         # determine if current user is admin
