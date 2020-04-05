@@ -99,32 +99,55 @@ shinyApp(
                         div(id = "error",
                             div(br(), tags$b("Error: "), span(id = "error_msg"))
                         )
-                    )
+                    ),
+
+                    # column(6,
+                    #        uiOutput("dataTableContainer")
+                    # )
                 ),
                 mainPanel(
-                    tableOutput('dataTableContainer')
-                ),
-                #        shinyjs::hidden(
-                #            div(
-                #                id = "thankyou_msg",
-                #                h3("Thanks, your response was submitted successfully!"),
-                #                actionLink("submit_another", "Submit another response")
-                #            )
-                #        ),
-                # column(6,
-                #        uiOutput("dataTableContainer")
-                # )
+                    tableOutput('dataTableContainer'),
+                    shinyjs::hidden(
+                      div(
+                        id = "thankyou_msg",
+                        h3("Thanks, your response was submitted successfully!"),
+                        actionLink("submit_another", "Submit another response"),
+                      )
+                    )
+                )
             )
             # tabPanel("Entered data"),
             # pageWithSidebar(
             #     headerPanel("Data pending cleaning"),
             #     sidebarPanel(
-            #         actionButton("submit_another", "Submit another response")
+            #         
             #     ),
             #     mainPanel = ("dataTableContainer")
             # )
             # 
-            
+        # tabPanel("Submitted"),
+        #   sidebarLayout(
+        #     sidebarPanel(
+        #       id="thanks",
+        #       shinyjs::hidden(
+        #         div(
+        #           id = "thankyou_msg",
+        #           h3("Thanks, your response was submitted successfully!"),
+        #           actionLink("submit_another", "Submit another response"),
+        #         )
+        #       )
+        #     ),
+        #     mainPanel(
+        #       shinyjs::hidden(
+        #         div(
+        #           id = "thankyou_msg",
+        #           h3("Thanks, your response was submitted successfully!"),
+        #           actionLink("submit_another", "Submit another response"),
+        #         )
+        #       )
+        #       
+        #     )
+        #   )
         ))),
     server = function(input, output, session) {
         
@@ -161,8 +184,11 @@ shinyApp(
             tryCatch({
                 saveData(formData())
                 shinyjs::reset("form")
-                shinyjs::hide("form")
+               #shinyjs::hide("form")
                 shinyjs::show("thankyou_msg")
+                shinyjs::hide("form")
+                shinyjs::hide("dataTableContainer")
+                shinyjs::show("thanks")
             },
             error = function(err) {
                 shinyjs::html("error_msg", err$message)
@@ -178,6 +204,8 @@ shinyApp(
         observeEvent(input$submit_another, {
             shinyjs::show("form")
             shinyjs::hide("thankyou_msg")
+            shinyjs::show("dataTableContainer")
+            shinyjs::js$refresh()
         })
         
         # render the admin panel
@@ -234,7 +262,7 @@ shinyApp(
         # Allow user to download responses
         output$downloadBtn <- downloadHandler(
             filename = function() { 
-                sprintf("mimic-google-form_%s.csv", humanTime())
+                sprintf("XFT_download_%s.csv", humanTime())
             },
             content = function(file) {
                 write.csv(loadData(), file, row.names = FALSE)
