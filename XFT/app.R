@@ -5,6 +5,7 @@ fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12",
 
 # which fields are mandatory
 fieldsMandatory <- c("group", "family", "species", "P50")
+filelength<-length(list.files("./responses"))
 
 # add an asterisk to an input label
 labelMandatory <- function(label) {
@@ -205,7 +206,7 @@ shinyApp(
             shinyjs::show("form")
             shinyjs::hide("thankyou_msg")
             shinyjs::show("dataTableContainer")
-            shinyjs::js$refresh()
+            #shinyjs::js$refresh() ##will refresh entire page, disconnects server.
         })
         
         # render the admin panel
@@ -246,8 +247,9 @@ shinyApp(
         # determine if current user is admin
         isAdmin <- reactive({
             is.null(session$user) || session$user %in% adminUsers
-        })    
+        })
         
+
         # Show the responses in the admin table
         output$responsesTable <- DT::renderDataTable({
             data <- loadData()
