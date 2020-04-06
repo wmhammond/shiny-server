@@ -199,6 +199,17 @@ shinyApp(
                 shinyjs::enable("submit")
                 shinyjs::hide("submit_msg")
             })
+            output$responsesTable <- DT::renderDataTable({
+              data <- loadData()
+              data$timestamp <- as.POSIXct(data$timestamp, origin="1970-01-01")
+              DT::datatable(
+                data,
+                rownames = FALSE,
+                options = list(searching = FALSE, lengthChange = FALSE)
+              )
+            })
+            
+            
         })
         
         # submit another response
@@ -260,6 +271,7 @@ shinyApp(
                 options = list(searching = FALSE, lengthChange = FALSE)
             )
         })
+        
         
         # Allow user to download responses
         output$downloadBtn <- downloadHandler(
