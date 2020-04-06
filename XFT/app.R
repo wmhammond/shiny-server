@@ -235,7 +235,7 @@ shinyApp(
         output$conditionalAnatomical1 <- renderUI({
           if(input$anatomicaltraits){
             selectInput("porosity", "Select Porosity:",
-                        c("diffuse-porosity", "ring-porosity", "semi-ring-porosity"))
+                        c("","diffuse-porosity", "ring-porosity", "semi-ring-porosity"))
           }
         })
         output$conditionalAnatomical2 <- renderUI({
