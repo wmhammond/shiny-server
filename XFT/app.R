@@ -52,6 +52,7 @@ databaseDir <- file.path("database")
 #databaseFile <-"database.csv"
 #database_df <- read.csv(file=file.path(databaseDir, databaseFile))
 database_df <-readRDS("database.RDS")
+databaseFilename <- "XFT_cleaned_databse.csv"
 # CSS to use in the app
 appCSS <-
     ".mandatory_star { color: red; }
@@ -304,12 +305,12 @@ shinyApp(
             }
         )
         ### download button for complete database
-        output$downloadBtn2 <- downloadHandler(
+        output$DownloadBtn2 <- downloadHandler(
           filename = function() { 
             sprintf("XFT_full_database_download_%s.csv", humanTime())
           },
-          content = function() {
-            write.csv(database_df, filename, row.names = FALSE)
+          content = function(databaseFilename) {
+            write.csv(database_df, databaseFilename , row.names = FALSE)
           }
         )
     }
