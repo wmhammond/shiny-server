@@ -47,7 +47,7 @@ loadData <- function() {
 
 # directory where responses get stored
 responsesDir <- file.path("responses")
-
+database_df <- read.csv("./database/database.csv")
 # CSS to use in the app
 appCSS <-
     ".mandatory_star { color: red; }
@@ -78,7 +78,7 @@ shinyApp(
         titlePanel(h1("Xylem Functional Traits Database"),
                    h4("Data submission and access portal")),
         tabsetPanel(
-            tabPanel("Submit Data"),
+            tabPanel("Submit Data",
             sidebarLayout(
                 sidebarPanel(
                     id = "form",
@@ -149,6 +149,16 @@ shinyApp(
         #       
         #     )
         #   )
+        ),
+        tabPanel("Database",
+                 sidebarLayout(
+                   sidebarPanel(
+                     id = "database",
+                     textInput("testinput", "Test Input")),
+                   mainPanel(
+                     tableOutput("databasePanel")
+                 )))
+        
         ))),
     server = function(input, output, session) {
         
@@ -231,6 +241,13 @@ shinyApp(
                 DT::dataTableOutput("responsesTable"), br(),
             )
         })
+        output$databasePanel <- renderUI({
+          div(id = "databaseTable",
+              h2("XFT Cleaned Database"),
+              downloadButton("DownloadBtn2", "Download Database"), br(), br(),
+              DT::datatable(database_df, class = "compact", filter = "top"), br(),
+          )
+        })
         #hydraulic traits
         output$conditionalInput <- renderUI({
           if(input$hydraulictraits){
@@ -282,5 +299,14 @@ shinyApp(
                 write.csv(loadData(), file, row.names = FALSE)
             }
         )    
+        ### download button for complete database
+        output$downloadBtn2 <- downloadHandler(
+          filename = function() { 
+            sprintf("XFT_full_database_download_%s.csv", humanTime())
+          },
+          content = function(file) {
+            write.csv(database_df, file=filename, row.names = FALSE)
+          }
+        )
     }
 )
