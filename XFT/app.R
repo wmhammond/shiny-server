@@ -1,5 +1,6 @@
 library(shiny)
 library(DT)
+library(data.table)
 # which fields get saved 
 fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88", "porosity", "conduit.density")
 
@@ -47,7 +48,7 @@ loadData <- function() {
 
 # directory where responses get stored
 responsesDir <- file.path("responses")
-database_df <- read.csv("database.csv")
+database_df <- fread("database.csv")
 # CSS to use in the app
 appCSS <-
     ".mandatory_star { color: red; }
