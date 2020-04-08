@@ -49,7 +49,7 @@ loadData <- function() {
 # directory where responses get stored
 responsesDir <- file.path("responses")
 databaseDir <- file.path("database")
-databaseFile <-"database.csv"
+#databaseFile <-"database.csv"
 #database_df <- read.csv(file=file.path(databaseDir, databaseFile))
 # CSS to use in the app
 appCSS <-
