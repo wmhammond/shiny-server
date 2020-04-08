@@ -1,6 +1,6 @@
 library(shiny)
 library(DT)
-library(data.table)
+#library(data.table)
 # which fields get saved 
 fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88", "porosity", "conduit.density")
 
