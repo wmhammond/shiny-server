@@ -1,5 +1,6 @@
 library(shiny)
 library(DT)
+library(ggplot2)
 #library(data.table)
 # which fields get saved 
 fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88", "porosity", "conduit.density")
@@ -161,7 +162,18 @@ shinyApp(
                      id = "database",
                      textInput("testinput", "Test Input")),
                    mainPanel(
-                     tableOutput("databasePanel")
+                     tableOutput("databasePanel"),
+                     tableOutput("database")
+                   ))),
+        tabPanel("Explore",
+                 sidebarLayout(
+                   sidebarPanel(
+                     id = "explore",
+                     selectInput("x", "X Variable", names(database_df)),
+                     selectInput("y", "Y Variable", names(database_df))
+                     ),
+                   mainPanel(
+                     plotOutput("plot1")
                    )))
         
         ))),
@@ -249,8 +261,9 @@ shinyApp(
         output$databasePanel <- renderUI({
           div(id = "databaseTable",
               h2("XFT Cleaned Database"),
-              downloadButton("DownloadBtn2", "Download Database"), br(), br(),
-              DT::renderDataTable(database_df, server=TRUE, class = "compact", filter = "top"), br(),
+              downloadButton("DownloadBtn2", "Download Entire Database"),
+              downloadButton("DownloadBtn3", "Download Filtered Database"), br(),
+              DT::renderDataTable(database_df, server=TRUE, class = 'white-space: nowrap', filter = "top"), br(),
           )
         })
         #hydraulic traits
@@ -313,5 +326,17 @@ shinyApp(
             write.csv(database_df, databaseFilename , row.names = FALSE)
           }
         )
+        output$DownloadBtn3 <- downloadHandler(
+          filename = function() { 
+            sprintf("XFT_filtered_database_download_%s.csv", humanTime())
+          },
+          content = function(databaseFilename) {
+            write.csv(database_df[input[["database_rows_all"]], ], databaseFilename , row.names = FALSE)
+          }
+        )
+        output$plot1 <- renderPlot({
+          ggplot(database_df, aes(x=input$x, group = input$x)) + geom_histogram(stat="count", position = "dodge")
+        })
+        
     }
 )
