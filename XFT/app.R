@@ -261,6 +261,7 @@ shinyApp(
                                   options=list(#autoWidth=FALSE,
                                                deferRender = TRUE,
                                                scrollY = 600,
+                                               scrollX= TRUE,
                                                scroller = TRUE,
                                                dom ="Bfrtip",
                                                buttons=list(list(extend="csv", 
