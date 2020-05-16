@@ -257,16 +257,27 @@ shinyApp(
               downloadButton("DownloadBtn2", "Download Entire Database"),
               # downloadButton("DownloadBtn3", "Download Filtered Database"), br(),
               DT::renderDataTable(database_df,
-                                  extensions = c("Buttons","Scroller"),
-                                  options=list(#autoWidth=FALSE,
-                                               deferRender = TRUE,
+                                  extensions = c("Buttons","Scroller","FixedColumns"),
+                                  options=list(deferRender = TRUE,
                                                scrollY = 600,
                                                scrollX= TRUE,
                                                scroller = TRUE,
-                                               dom ="Bfrtip",
-                                               buttons=list(list(extend="csv", 
+                                               # columnDefs = list(
+                                               #   list(targets = c(0,1,6:19,21:200), visible = FALSE)),
+                                              lengthMenu = list(c(5, 15, -1), c('5', '15', 'All')),
+                                              pageLength = 15,
+                                              dom ="Bfrtip",
+                                              fixedColumns=TRUE,
+                                               buttons=list("colvis",list(extend="csv", 
                                                                  text="Download Filtered Database",
-                                                                 filename=paste('XFT_Filtered_', Sys.Date(), sep = '')))),
+                                                                 filename=paste('XFT_Filtered_', Sys.Date(), sep = '')),
+                                                            list(
+                                                              extend = "collection",
+                                                              text = 'Show All',
+                                                              action = DT::JS("function ( e, dt, node, config ) {
+                                    dt.page.len(-1);
+                                    dt.ajax.reload();
+                                }")))),
                                   server=TRUE, 
                                   class = 'white-space: nowrap',
                                   filter = "top",
