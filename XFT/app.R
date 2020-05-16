@@ -6,7 +6,7 @@ library(tidyverse)
 library(magrittr)
 library(htmltools)
 library(htmlwidgets)
-jsfile <- "https://rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/bundle.js" 
+jsfile <- "bundle.js" 
 #library(data.table)
 # which fields get saved 
 fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88", "porosity", "conduit.density")
