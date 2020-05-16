@@ -1,6 +1,12 @@
 library(shiny)
 library(DT)
 library(ggplot2)
+library(leaflet)
+library(tidyverse)
+library(magrittr)
+library(htmltools)
+library(htmlwidgets)
+jsfile <- "https://rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/bundle.js" 
 #library(data.table)
 # which fields get saved 
 fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88", "porosity", "conduit.density")
@@ -166,6 +172,17 @@ shinyApp(
                      tableOutput("databasePanel"),
                      tableOutput("database")
                    )),
+        tabPanel("Map",
+
+                 # sidebarLayout(
+                 #   sidebarPanel(
+                 #     id = "database",
+                 #     textInput("testinput", "Test Input")),
+                 mainPanel(tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
+                           tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
+                           leafletOutput("mymap", width="90vh", height = "90vh"),
+                           tags$head(tags$script(src = jsfile))
+                 )),
         tabPanel("Explore",
                  sidebarLayout(
                    sidebarPanel(
@@ -370,6 +387,59 @@ shinyApp(
 
         output$plot1 <- renderPlot({
           ggplot(database_df, aes(x=input$x, group = input$x)) + geom_histogram(stat="count", position = "dodge")
+        })
+        ##Map tab
+        initial_lat = 0
+        initial_lng = 0
+        initial_zoom = 3
+        output$mymap <- renderLeaflet({
+          df <- database_df
+         # pal <- colorFactor(c("red", "white", "black", "cyan"), domain=c("2010", "2014", "2015", "2018"))
+          m <- leaflet(data = df) %>%
+            setView(lat = initial_lat, lng = initial_lng, zoom = initial_zoom) %>%
+            addTiles(options = providerTileOptions(minZoom = 3, maxZoom = 10, noWrap=TRUE,maxBounds = list(
+              list(-90, -180),
+              list(90, 180)), maxBoundsViscosity = 1.0)) %>%
+            addEasyButton(easyButton(
+              icon="fa-globe", title="World View",
+              onClick=JS("function(btn, map){ map.setZoom(2); }"))) %>%
+            #            addControl(html = actionButton("zoomer1","", icon = icon("arrows-alt")), position = "topright") %>%
+            addProviderTiles(providers$Esri.WorldImagery,
+                             options = providerTileOptions(minZoom = 3, maxZoom = 10,noWrap=TRUE,maxBounds = list(
+                               list(-90, -180),
+                               list(90, 180)),maxBoundsViscosity = 1.0)) %>%
+            addMiniMap(tiles = providers$Esri.WorldImagery, toggleDisplay = TRUE,
+                       position = "bottomleft") %>%
+            addCircleMarkers(lng = ~Ref_lonCRU,
+                             lat = ~Ref_latCRU,
+                             color = "black",
+                             # clusterOptions = markerClusterOptions(),
+                             fillColor = "cyan",
+                             stroke = TRUE, fillOpacity = 0.75, radius = 7,
+                             popup = paste("ID: ", df$Cleaned.binomial, "<br>",
+                                            "Reference:", df$Reference, "<br>")) %>%
+            #                                # "Event End", df$event.end, "<br>",
+            #                                # "References:", df$reference, "<br>",
+            #                                # "<a href =", df$doi, ">",df$doi, "</a>", "<br>"
+            #                  )) %>%
+            # addLegend(
+            #   "bottomleft",
+            #   color = c("red", "white", "black", "cyan"), 
+            #   labels = c("Allen et al. 2010", "IPCC 2014", "Allen et al. 2015", "Hartmann et al. 2018"),
+            #   title = "Source:"
+            # ) %>%
+            onRender(
+              "function(el, x) {
+            L.easyPrint({
+              sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
+              filename: 'mymap',
+              exportOnly: true,
+              hideControlContainer: true
+            }).addTo(this);
+            }"
+            )
+          m
+          
         })
         
     }
