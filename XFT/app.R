@@ -4,11 +4,9 @@ library(ggplot2)
 #library(data.table)
 # which fields get saved 
 fieldsAll <- c("group", "family", "genus", "species", "subspecies","P50", "P12", "P88", "porosity", "conduit.density")
-
 # which fields are mandatory
 fieldsMandatory <- c("group", "family", "species", "P50")
 filelength<-length(list.files("./responses"))
-
 # add an asterisk to an input label
 labelMandatory <- function(label) {
     tagList(
@@ -16,18 +14,15 @@ labelMandatory <- function(label) {
         span("*", class = "mandatory_star")
     )
 }
-
 # get current Epoch time
 epochTime <- function() {
     return(as.integer(Sys.time()))
 }
-
 # get a formatted string of the timestamp (exclude colons as they are invalid
 # characters in Windows filenames)
 humanTime <- function() {
     format(Sys.time(), "%Y%m%d-%H%M%OS")
 }
-
 # save the results to a file
 saveData <- function(data) {
     fileName <- sprintf("%s_%s.csv",
@@ -37,7 +32,6 @@ saveData <- function(data) {
     write.csv(x = data, file = file.path(responsesDir, fileName),
               row.names = FALSE, quote = TRUE)
 }
-
 # load all responses into a data.frame
 loadData <- function() {
     files <- list.files(file.path(responsesDir), full.names = TRUE)
@@ -46,7 +40,6 @@ loadData <- function() {
     data <- do.call(rbind, data)
     data
 }
-
 # directory where responses get stored
 responsesDir <- file.path("responses")
 databaseDir <- file.path("database")
@@ -65,7 +58,7 @@ appCSS <-
   "
 
 # usernames that are admins
-adminUsers <- c("admin", "prof")
+# adminUsers <- c("admin", "prof")
 
 # info for sharing this app on facebook/twitter
 share <- list(
@@ -157,14 +150,14 @@ shinyApp(
         #   )
             ),
         tabPanel("Database",
-                 sidebarLayout(
-                   sidebarPanel(
-                     id = "database",
-                     textInput("testinput", "Test Input")),
-                   mainPanel(
+                 # sidebarLayout(
+                 #   sidebarPanel(
+                 #     id = "database",
+                 #     textInput("testinput", "Test Input")),
+                   mainPanel(width="auto",
                      tableOutput("databasePanel"),
                      tableOutput("database")
-                   ))),
+                   )),
         tabPanel("Explore",
                  sidebarLayout(
                    sidebarPanel(
@@ -178,7 +171,7 @@ shinyApp(
         
         ))),
     server = function(input, output, session) {
-        
+        filtered_df<-reactive(database_df)
         # Enable the Submit button when all mandatory fields are filled out
         observe({
             mandatoryFilled <-
@@ -249,8 +242,8 @@ shinyApp(
         
         # render the admin panel
         output$dataTableContainer <- renderUI({
-            if (!isAdmin()) return()
-            
+            # if (!isAdmin()) return()
+            # 
             div(
                 id = "dataTable",
                 h2("Previous submissions"),
@@ -262,8 +255,21 @@ shinyApp(
           div(id = "databaseTable",
               h2("XFT Cleaned Database"),
               downloadButton("DownloadBtn2", "Download Entire Database"),
-              downloadButton("DownloadBtn3", "Download Filtered Database"), br(),
-              DT::renderDataTable(database_df, server=TRUE, class = 'white-space: nowrap', filter = "top"), br(),
+              # downloadButton("DownloadBtn3", "Download Filtered Database"), br(),
+              DT::renderDataTable(database_df,
+                                  extensions = c("Buttons","Scroller"),
+                                  options=list(#autoWidth=FALSE,
+                                               deferRender = TRUE,
+                                               scrollY = 600,
+                                               scroller = TRUE,
+                                               dom ="Bfrtip",
+                                               buttons=list(list(extend="csv", 
+                                                                 text="Download Filtered Database",
+                                                                 filename=paste('XFT_Filtered_', Sys.Date(), sep = '')))),
+                                  server=TRUE, 
+                                  class = 'white-space: nowrap',
+                                  filter = "top",
+                                  rownames=FALSE), br(),
           )
         })
         #hydraulic traits
@@ -290,10 +296,10 @@ shinyApp(
           }
         })
         
-        # determine if current user is admin
-        isAdmin <- reactive({
-            is.null(session$user) || session$user %in% adminUsers
-        })
+        # # determine if current user is admin
+        # isAdmin <- reactive({
+        #     is.null(session$user) || session$user %in% adminUsers
+        # })
         
 
         # Show the responses in the admin table
@@ -326,14 +332,15 @@ shinyApp(
             write.csv(database_df, databaseFilename , row.names = FALSE)
           }
         )
-        output$DownloadBtn3 <- downloadHandler(
-          filename = function() { 
-            sprintf("XFT_filtered_database_download_%s.csv", humanTime())
-          },
-          content = function(databaseFilename) {
-            write.csv(database_df[input[["database_rows_all"]], ], databaseFilename , row.names = FALSE)
-          }
-        )
+        # output$DownloadBtn3 <- downloadHandler(
+        #   filename = function() { 
+        #     sprintf("XFT_filtered_database_download_%s.csv", humanTime())
+        #   },
+        #   content = function(databaseFilename) {
+        #     write.csv(database_df[input[["database_rows_all"]], ], databaseFilename , row.names = FALSE)
+        #   }
+        # )
+
         output$plot1 <- renderPlot({
           ggplot(database_df, aes(x=input$x, group = input$x)) + geom_histogram(stat="count", position = "dodge")
         })
