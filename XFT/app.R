@@ -78,7 +78,8 @@ shinyApp(
                    h4("Data submission and access portal")),
         tabsetPanel(
           tabPanel("Home Page",
-                   mainPanel(includeHTML("welcome.html"))),
+                   mainPanel(img(src='Picture1.png',height=728,width=829),
+                             includeHTML("welcome.html"))),
             tabPanel("Submit Data",
             sidebarLayout(
                 sidebarPanel(
