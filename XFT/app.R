@@ -85,7 +85,7 @@ shinyApp(
         tabsetPanel(
           tabPanel("Home Page",
                    mainPanel(tags$h4("Welcome to the Xylem Functional Traits Database portal")),
-                     img(src='Picture1.png',height="100%",width="100%"),
+                     img(src='Picture1.png',height="95%"),
                              includeHTML("welcome.html")),
           tabPanel("Trait Definitions",
                    mainPanel(tags$h4("Trait definitions"),
