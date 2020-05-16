@@ -77,6 +77,8 @@ shinyApp(
         titlePanel(h1("Xylem Functional Traits Database"),
                    h4("Data submission and access portal")),
         tabsetPanel(
+          tabPanel("Home Page",
+                   mainPanel(includeHTML("welcome.html"))),
             tabPanel("Submit Data",
             sidebarLayout(
                 sidebarPanel(
@@ -170,6 +172,8 @@ shinyApp(
                    )))
         
         ))),
+    
+    
     server = function(input, output, session) {
         filtered_df<-reactive(database_df)
         # Enable the Submit button when all mandatory fields are filled out
@@ -240,7 +244,7 @@ shinyApp(
             #shinyjs::js$refresh() ##will refresh entire page, disconnects server.
         })
         
-        # render the admin panel
+          # render the admin panel
         output$dataTableContainer <- renderUI({
             # if (!isAdmin()) return()
             # 
