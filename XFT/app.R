@@ -179,7 +179,7 @@ shinyApp(
                  #     id = "database",
                  #     textInput("testinput", "Test Input")),
                  mainPanel(tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
-                           tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
+                      #     tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
                            leafletOutput("mymap", width="90vh", height = "90vh"),
                            tags$head(tags$script(src = jsfile))
                  )),
@@ -391,13 +391,13 @@ shinyApp(
         ##Map tab
         initial_lat = 0
         initial_lng = 0
-        initial_zoom = 3
+        initial_zoom = 2
         output$mymap <- renderLeaflet({
           df <- database_df
          # pal <- colorFactor(c("red", "white", "black", "cyan"), domain=c("2010", "2014", "2015", "2018"))
           m <- leaflet(data = df) %>%
             setView(lat = initial_lat, lng = initial_lng, zoom = initial_zoom) %>%
-            addTiles(options = providerTileOptions(minZoom = 3, maxZoom = 10, noWrap=TRUE,maxBounds = list(
+            addTiles(options = providerTileOptions(minZoom = 2, maxZoom = 10, noWrap=TRUE,maxBounds = list(
               list(-90, -180),
               list(90, 180)), maxBoundsViscosity = 1.0)) %>%
             addEasyButton(easyButton(
@@ -405,7 +405,7 @@ shinyApp(
               onClick=JS("function(btn, map){ map.setZoom(2); }"))) %>%
             #            addControl(html = actionButton("zoomer1","", icon = icon("arrows-alt")), position = "topright") %>%
             addProviderTiles(providers$Esri.WorldImagery,
-                             options = providerTileOptions(minZoom = 3, maxZoom = 10,noWrap=TRUE,maxBounds = list(
+                             options = providerTileOptions(minZoom = 2, maxZoom = 10,noWrap=TRUE,maxBounds = list(
                                list(-90, -180),
                                list(90, 180)),maxBoundsViscosity = 1.0)) %>%
             addMiniMap(tiles = providers$Esri.WorldImagery, toggleDisplay = TRUE,
