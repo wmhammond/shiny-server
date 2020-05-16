@@ -81,6 +81,10 @@ shinyApp(
                    mainPanel(tags$h4("Welcome to the Xylem Functional Traits Database portal")),
                      img(src='Picture1.png',height=728,width=829),
                              includeHTML("welcome.html")),
+          tabPanel("Trait Definitions",
+                   mainPanel(tags$h4("Trait definitions"),
+                             br(),
+                             tags$h6("...coming soon..."))),
             tabPanel("Submit Data",
             sidebarLayout(
                 sidebarPanel(
@@ -170,8 +174,13 @@ shinyApp(
                      selectInput("y", "Y Variable", names(database_df))
                      ),
                    mainPanel(
+                     tags$h4("Interactive Plots [!under construction!]"),
                      plotOutput("plot1")
-                   )))
+                   ))),
+        tabPanel("Citation",
+                 mainPanel(tags$h4("Citation information for the database:"),
+                           br(),
+                           tags$h6("Choat B., Jansen S., Brodribb T.J., Cochard H., Delzon S., Bhaskar R., Bucci S., Feild T.S., Gleason S.M., Hacke U.G., Jacobsen A.L., Lens F., Maherali H., Martinez-Vilalta J., Mayr S., Mencuccini M., Mitchell P.J., Nardini A., Pittermann J., Pratt R.B., Sperry J.S., Westoby M., Wright I.J., Zanne A. (2012) Global convergence in the vulnerability of forests to drought. Nature 491: 752-755. ")))
         
         ))),
     
