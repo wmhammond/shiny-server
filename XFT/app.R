@@ -89,8 +89,9 @@ shinyApp(
           #                   img(src='Picture1.png',height="95%"),
                              includeHTML("welcome.html"))),
           tabPanel("Trait Definitions",
-                   mainPanel(br(),
-                             includeHTML("trait_definitions.html"))),
+                   mainPanel(
+                     includeHTML("trait_definitions2.html")
+                     )),
             tabPanel("Submit Data",
             sidebarLayout(
                 sidebarPanel(
@@ -170,7 +171,7 @@ shinyApp(
                  #     textInput("testinput", "Test Input")),
                    mainPanel(width="auto",
                      tableOutput("databasePanel"),
-                     tableOutput("database")
+                     DT::dataTableOutput("database")
                    )),
         tabPanel("Map",
 
