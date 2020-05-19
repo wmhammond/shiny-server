@@ -24,7 +24,9 @@ cat(paste0("<style>",
 <!-- ```{r setup, include=FALSE} -->
 <!-- knitr::opts_chunk$set(echo = FALSE) -->
 <!-- ``` -->
-
+```{css}
+.tabset h2 {display: none;}
+```
 
 # Hydraulic Traits {.tabset}
 Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve: 
@@ -57,19 +59,17 @@ knitr::include_graphics("www/vc_twotypes.png")
 #### W = Weibull, P = polynomial,  PW = Pammenter Vander Willigen, L = linear
 ## P50 method
 #### DH = dehydration, CE = centrifuge, CA = cavitron, AD = air-injection double end, AS = air-injection single end, AE = acoustic emissions
-## Ks (kg m-1 MPa-1 s-1)
-#### stem specific conductivity = xylem conductivity per unit of cross-sectional sapwood area
-## Ks (mg m-1 MPa-1 s-1)
-#### stem specific conductivity = xylem conductivity per unit of cross-sectional sapwood area
-## KL (kg m-1 MPa-1 s-1)
-#### leaf specific conductivity = xylem conductivity per total area of leaves distal to the measured segment
-## ψp min predawn (MPa)
-#### Minimum predawn xylem pressure potential
-## ψp min midday (MPa)
-#### Minimum midday xylem pressure potential
+## Ks 
+#### (kg m-1 MPa-1 s-1) stem specific conductivity = xylem conductivity per unit of cross-sectional sapwood area
+#### (mg m-1 MPa-1 s-1) stem specific conductivity = xylem conductivity per unit of cross-sectional sapwood area
+## KL 
+#### (kg m-1 MPa-1 s-1) leaf specific conductivity = xylem conductivity per total area of leaves distal to the measured segment
+## ψmin
+#### ψp min predawn (MPa) Minimum predawn xylem pressure potential.
+#### ψp min midday (MPa) Minimum midday xylem pressure potential.
 ## Huber value
 #### ratio of conducting xylem area per supported leaf area
-## Sapwood capacitance  (kg m-3 MPa-1)
+## Capacitance
 #### Sapwood water storage capacity (kg m-3 MPa-1)
 # Anatomy
 Placeholder for anatomy traits.
