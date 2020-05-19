@@ -4,42 +4,53 @@
 # date: "5/19/2020"
 output: 
   html_document:
-    theme: flatly
+    # number_sections: true 
+    # theme: flatly
     toc: true
     toc_float:
       toc_depth: 2
-      number_sections: true 
       collapsed: true
       smooth_scroll: true
 
-   
 ---
-
-
+<!-- limit numbering depth for table of contents in chunk below -->
+```{r, results='asis', echo = F}
+toc_depth <- 2
+sel <- paste0("h",(toc_depth+1):10, collapse = " > span, ")
+cat(paste0("<style>",
+           sel, 
+           " > .header-section-number { display: none; } </style>"))
+```
 <!-- ```{r setup, include=FALSE} -->
 <!-- knitr::opts_chunk$set(echo = FALSE) -->
 <!-- ``` -->
 
 
-# Hydraulic Traits
+# Hydraulic Traits {.tabset}
 Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve: 
 
-```{r fig.align='center',onecurve, echo=FALSE, fig.cap="Figure 1: A vulnerability curve.", out.width = '100%'}
-knitr::include_graphics("www/vulnerability_curve.png")
-```
-
-## P50 (MPa)
+## P50
 #### the xylem tension at which 50% of the maximum hydraulic conductivity is lost
+```{r fig.align='center',p50, echo=FALSE, fig.cap="A vulnerability curve with P50 circled.", out.width = '100%'}
+knitr::include_graphics("www/p50.png")
+```
 ## P12 
 #### the xylem tension at which 12% of the maximum hydraulic conductivity is lost
-## P88 (MPa)
+```{r fig.align='center',p12, echo=FALSE, fig.cap="A vulnerability curve with P50 circled.", out.width = '100%'}
+knitr::include_graphics("www/p12.png")
+```
+
+## P88
 #### the xylem tension at which 88% of the maximum hydraulic conductivity is lost
+```{r fig.align='center',p88, echo=FALSE, fig.cap="A vulnerability curve with P50 circled.", out.width = '100%'}
+knitr::include_graphics("www/p88.png")
+```
 ## Slope
 #### Slope of vulnerability curve (% / MPa) = (88-50)/(P88-P50)
 ## Curve
-#### E = exponential, S = sigmoidal, O = other
+#### E = exponential (blue), S = sigmoidal (red), O = other
 
-```{r fig.align='center',twocurves, echo=FALSE, fig.cap="Figure 2: An s-shaped vulnerability curve (red solid line) and an r-shaped vulnerability curve (blue dashed line).", out.width = '100%'}
+```{r fig.align='center',twocurves, echo=FALSE, fig.cap="Figure 2: A sigmoidal vulnerability curve (red solid line, 'S') and an exponential vulnerability curve (blue dashed line, 'E').", out.width = '100%'}
 knitr::include_graphics("www/vc_twotypes.png")
 ```
 ## Equation
