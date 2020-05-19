@@ -1,11 +1,13 @@
 library(shiny)
 library(DT)
+library(knitr)
 library(ggplot2)
 library(leaflet)
 library(tidyverse)
 library(magrittr)
 library(htmltools)
 library(htmlwidgets)
+library(markdown)
 jsfile <- "bundle.js" 
 #library(data.table)
 # which fields get saved 
@@ -86,13 +88,13 @@ shinyApp(
           tabPanel("Home Page",
                    mainPanel(tags$h4("Welcome to the Xylem Functional Traits Database portal"),
                              br(),
-          #                   img(src='Picture1.png',height="95%"),
                              includeHTML("welcome.html"))),
           tabPanel("Trait Definitions",
-                   mainPanel(
-                     br(),
-                     includeHTML("trait_definitions2.html")
-                     )),
+                   mainPanel(width="100%",
+                     tags$iframe(src = 'trait_definitions.html', # put .html to /www
+                                 width = '100%', height = '800px', 
+                                 frameborder = 0, scrolling = 'auto'
+                     ))),
             tabPanel("Submit Data",
             sidebarLayout(
                 sidebarPanel(
@@ -390,6 +392,11 @@ shinyApp(
         output$plot1 <- renderPlot({
           ggplot(database_df, aes(x=input$x, group = input$x)) + geom_histogram(stat="count", position = "dodge")
         })
+        
+        # ##markdown
+        # output$markdown <- renderUI({
+        #   HTML(markdown::markdownToHTML(knit('trait_definitions.Rmd'), options=c("toc",toc_depth=2)))
+        # })
         ##Map tab
         initial_lat = 0
         initial_lng = 0

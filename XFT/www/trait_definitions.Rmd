@@ -6,12 +6,10 @@ output:
   html_document:
     theme: flatly
     toc: true
-    toc_float:
-      toc_depth: 2
-      number_sections: true 
-      collapsed: true
-      smooth_scroll: true
-
+    toc_float: 
+      collapsed: false
+      smooth_scrool: true
+      number_sections: false
    
 ---
 
@@ -60,11 +58,3 @@ knitr::include_graphics("www/vc_twotypes.png")
 #### ratio of conducting xylem area per supported leaf area
 ## Sapwood capacitance  (kg m-3 MPa-1)
 #### Sapwood water storage capacity (kg m-3 MPa-1)
-# Anatomy
-Placeholder for anatomy traits.
-
-## Anatomy trait 1
-Placeholder for anatomy trait 1 info.
-
-## Anatomy trait 2
-Placeholder for anatomy trait 2 info.
