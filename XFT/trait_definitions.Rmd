@@ -4,7 +4,7 @@
 # date: "5/19/2020"
 output: 
   html_document:
-    theme: flatly
+    # theme: flatly
     toc: true
     toc_float: 
       collapsed: false
