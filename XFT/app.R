@@ -91,6 +91,7 @@ shinyApp(
                              includeHTML("welcome.html"))),
           tabPanel("Trait Definitions",
                    mainPanel(width="100%",
+                             height="95vh",
                      tags$iframe(src = 'trait_definitions.html', # put .html to /www
                                  width = '100%', height = '800px', 
                                  frameborder = 0, scrolling = 'auto'
