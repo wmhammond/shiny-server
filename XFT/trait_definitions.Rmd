@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Hydraulic Traits
 Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve: 
 
-```{r fig.align='center',onecurve, echo=FALSE, fig.cap="Figure 1: A vulnerability curve.", out.width = '80%'}
+```{r fig.align='center',onecurve, echo=FALSE, fig.cap="Figure 1: A vulnerability curve.", out.width = '100%'}
 knitr::include_graphics("www/vulnerability_curve.png")
 ```
 
@@ -37,7 +37,7 @@ knitr::include_graphics("www/vulnerability_curve.png")
 ## Curve
 #### E = exponential, S = sigmoidal, O = other
 
-```{r fig.align='center',twocurves, echo=FALSE, fig.cap="Figure 2: An s-shaped vulnerability curve (red solid line) and an r-shaped vulnerability curve (blue dashed line).", out.width = '80%'}
+```{r fig.align='center',twocurves, echo=FALSE, fig.cap="Figure 2: An s-shaped vulnerability curve (red solid line) and an r-shaped vulnerability curve (blue dashed line).", out.width = '100%'}
 knitr::include_graphics("www/vc_twotypes.png")
 ```
 ## Equation
