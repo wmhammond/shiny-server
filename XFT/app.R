@@ -90,6 +90,7 @@ shinyApp(
                              includeHTML("welcome.html"))),
           tabPanel("Trait Definitions",
                    mainPanel(
+                     br(),
                      includeHTML("trait_definitions2.html")
                      )),
             tabPanel("Submit Data",
