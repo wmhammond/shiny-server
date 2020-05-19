@@ -38,17 +38,20 @@ knitr::include_graphics("www/p50.png")
 ```
 ## P12 
 #### the xylem tension at which 12% of the maximum hydraulic conductivity is lost
-```{r fig.align='center',p12, echo=FALSE, fig.cap="A vulnerability curve with P50 circled.", out.width = '100%'}
+```{r fig.align='center',p12, echo=FALSE, fig.cap="A vulnerability curve with P12 circled.", out.width = '100%'}
 knitr::include_graphics("www/p12.png")
 ```
 
 ## P88
 #### the xylem tension at which 88% of the maximum hydraulic conductivity is lost
-```{r fig.align='center',p88, echo=FALSE, fig.cap="A vulnerability curve with P50 circled.", out.width = '100%'}
+```{r fig.align='center',p88, echo=FALSE, fig.cap="A vulnerability curve with P88 circled.", out.width = '100%'}
 knitr::include_graphics("www/p88.png")
 ```
 ## Slope
 #### Slope of vulnerability curve (% / MPa) = (88-50)/(P88-P50)
+```{r fig.align='center',slope, echo=FALSE, fig.cap="A vulnerability curve with P50, P88 circled, and the equation for slope.", out.width = '100%'}
+knitr::include_graphics("www/slope.png")
+```
 ## Curve
 #### E = exponential (blue), S = sigmoidal (red), O = other
 
