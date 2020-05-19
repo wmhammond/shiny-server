@@ -18,8 +18,6 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Traits Definitions:
-
 
 # Hydraulic Traits
 Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve: 

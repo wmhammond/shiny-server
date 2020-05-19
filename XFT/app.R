@@ -89,7 +89,8 @@ shinyApp(
           #                   img(src='Picture1.png',height="95%"),
                              includeHTML("welcome.html"))),
           tabPanel("Trait Definitions",
-                   mainPanel(includeHTML("trait_definitions.html"))),
+                   mainPanel(br(),
+                             includeHTML("trait_definitions.html"))),
             tabPanel("Submit Data",
             sidebarLayout(
                 sidebarPanel(
