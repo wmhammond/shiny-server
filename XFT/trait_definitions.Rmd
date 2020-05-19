@@ -3,20 +3,20 @@
 # author: "William Hammond"
 # date: "5/19/2020"
 output: 
-  html_document:
+  html_fragment:
     # theme: flatly
     toc: true
-    toc_float: 
-      collapsed: false
-      smooth_scrool: true
-      number_sections: false
+    # toc_float: 
+    #   collapsed: false
+    #   smooth_scrool: true
+    #   number_sections: false
    
 ---
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::opts_chunk$set(echo = FALSE) -->
+<!-- ``` -->
 
 
 # Hydraulic Traits
