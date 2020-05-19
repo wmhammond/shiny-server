@@ -92,7 +92,7 @@ shinyApp(
           tabPanel("Trait Definitions",
                    mainPanel(
                      tags$iframe(src = 'trait_definitions.html', # put .html to /www
-                                 width = '100%', height = '95vh', 
+                                 style='width:95vw;height:90vh;', 
                                  frameborder = 0, scrolling = 'auto'
                      ))),
             tabPanel("Submit Data",
