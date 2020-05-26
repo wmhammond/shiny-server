@@ -191,11 +191,13 @@ shinyApp(
                  sidebarLayout(
                    sidebarPanel(
                      id = "explore",
-                     selectInput("x", "X Variable", names(database_df)),
-                     selectInput("y", "Y Variable", names(database_df))
+                     selectizeInput("Family", "Select family", sort(unique(database_df$Cleaned.family)), options=list(
+                                 placeholder = 'Please select an option below',
+                                 onInitialize = I('function() { this.setValue(""); }'))),
                      ),
                    mainPanel(
-                     tags$h4("Interactive Plots [!under construction!]"),
+                     tags$h6("Interactive Plots [!under construction!]"),
+                     plotOutput("plot2"),
                      plotOutput("plot1")
                    ))),
         tabPanel("Citation",
@@ -388,11 +390,30 @@ shinyApp(
         #     write.csv(database_df[input[["database_rows_all"]], ], databaseFilename , row.names = FALSE)
         #   }
         # )
-
-        output$plot1 <- renderPlot({
-          ggplot(database_df, aes(x=input$x, group = input$x)) + geom_histogram(stat="count", position = "dodge")
-        })
-        
+        df_subset <- reactive({
+            a<-subset(database_df, Family == input$Family)
+            return(a)
+          })
+          output$plot1 <- renderPlot({
+            req(input$Family)
+            df_plot_subset<-df_subset()
+          ggplot(df_plot_subset, aes(x=as.numeric(as.character(P50..MPa.)))) + 
+            geom_histogram(bins=30, color='black') +
+            xlim(0,-16) + 
+            xlab("P50") +
+            ylab("Count") +
+            ggtitle(paste(input$Family, " P50 values:")) +
+            theme_minimal()
+          }, bg = 'transparent')
+        output$plot2 <- renderPlot({
+          ggplot(database_df, aes(x=as.numeric(as.character(P50..MPa.)))) + 
+            geom_histogram(bins=30, color='black') +
+            xlim(0,-16) + 
+            xlab("P50") +
+            ylab("Count") +
+            ggtitle("Entire Database P50 values:") +
+            theme_minimal()
+          }, bg='transparent')
         # ##markdown
         # output$markdown <- renderUI({
         #   HTML(markdown::markdownToHTML(knit('trait_definitions.Rmd'), options=c("toc",toc_depth=2)))
