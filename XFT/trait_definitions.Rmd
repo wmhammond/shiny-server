@@ -58,7 +58,7 @@ knitr::include_graphics("www/vc_twotypes.png")
 ## Equation
 #### W = Weibull, P = polynomial,  PW = Pammenter Vander Willigen, L = linear
 ## P50 method
-#### DH = dehydration, CE = centrifuge, CA = cavitron, AD = air-injection double end, AS = air-injection single end, AE = acoustic emissions, OV =  [Optical Vulnerability](https://doi.org/10.1104/pp.17.00552), MicroCT = microCT, Pn = pneumatic method/Pneumatron, MRI (magnetic resonance imaging)
+#### DH = dehydration, CE = centrifuge, CA = cavitron, AD = air-injection double end, AS = air-injection single end, AE = acoustic emissions, OV = optical vulnerability [(Brodribb *et al.*, 2017)](https://doi.org/10.1104/pp.17.00552), MicroCT = microCT, Pn = pneumatic method/Pneumatron, MRI (magnetic resonance imaging)
 
 
 ## Ks 
