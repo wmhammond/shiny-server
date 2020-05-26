@@ -300,8 +300,8 @@ shinyApp(
                                                scrollY = 600,
                                                scrollX= TRUE,
                                                scroller = TRUE,
-                                               # columnDefs = list(
-                                               #   list(targets = c(0,1,6:19,21:200), visible = FALSE)),
+                                               columnDefs = list(
+                                                 list(targets = c(0:7,89:181), visible = FALSE)),
                                               lengthMenu = list(c(5, 15, -1), c('5', '15', 'All')),
                                               pageLength = 15,
                                               dom ="Bfrtip",
