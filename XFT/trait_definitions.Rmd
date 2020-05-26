@@ -189,9 +189,10 @@ Placeholder for climate overview.
 #### Evapotranspiration		
 ## Biome
 #### TRR = tropical rainforest, TRS = tropical seasonal forest (savanna), TMR = temperate rain forest, TMS = temperate seasonal forest, WDS = woodland/shrubland, DES = deserts, BOT = boreal-tundra		
-# Database
+# Database {.tabset}
 Placeholder for database overview.
-## Reference
+
+## Reference 
 #### Reference from which data was contributed.
 ## Contributor I 
 #### Name of the participant who integrated the data
