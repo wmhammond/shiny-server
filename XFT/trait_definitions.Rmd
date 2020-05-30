@@ -25,7 +25,7 @@ cat(paste0("<style>",
 <!-- knitr::opts_chunk$set(echo = FALSE) -->
 <!-- ``` -->
 
-# Hydraulic Traits {.tabset}
+# Hydraulic Traits {.tabset .tabset-pills}
 Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve: 
 
 ## P50
@@ -45,7 +45,7 @@ knitr::include_graphics("www/p12.png")
 knitr::include_graphics("www/p88.png")
 ```
 ## Slope
-#### Slope of vulnerability curve (% / MPa) = (88-50)/(P88-P50)
+#### Slope of vulnerability curve (% / MPa) = (88-12)/(P88-P12) [(Domec and Gartner, 2001)](https://doi.org/10.1007/s004680100095){target="_blank"}
 ```{r fig.align='center',slope, echo=FALSE, fig.cap="A vulnerability curve with P50, P88 circled, and the equation for slope.", out.width = '100%'}
 knitr::include_graphics("www/slope.png")
 ```
@@ -73,7 +73,7 @@ knitr::include_graphics("www/vc_twotypes.png")
 #### ratio of conducting xylem area per supported leaf area
 ## Capacitance
 #### Sapwood water storage capacity (kg m-3 MPa-1)
-# Anatomy {.tabset}
+# Anatomy {.tabset .tabset-pills}
 Placeholder for anatomy traits overview.
 
 ## Av. tracheid length (μm)
@@ -123,7 +123,7 @@ Placeholder for anatomy traits overview.
 ## Vasicentric tracheids
 #### tracheids surrounding vessels (present or absent)
 
-# Mechanical Properties {.tabset}
+# Mechanical Properties {.tabset .tabset-pills}
 Placeholder for mechanical properties overview.
 
 ## Modulus of rupture (MOR)
@@ -139,7 +139,7 @@ Placeholder for mechanical properties overview.
 ## ρ (wood specific gravity; g/cm3)
 #### oven dry mass/fresh volume [please make a note in the notes column when green mass/volume was measured]
 
-# Leaf data {.tabset}
+# Leaf data {.tabset .tabset-pills}
 Placeholder for leaf data overview.
 
 ## SLA (specific leaf area; cm2 g-1)	
@@ -161,7 +161,7 @@ Placeholder for leaf data overview.
 ## D13C
 #### big delta 13C (per mill) for leaves
 
-# Location {.tabset}
+# Location {.tabset .tabset-pills}
 Placeholder for location overview.
 
 ## Location
@@ -180,7 +180,7 @@ Placeholder for location overview.
 #### Altitude (m)
 ## Altitude provenance
 #### Altitude provenance (m)
-# Climate {.tabset}
+# Climate {.tabset .tabset-pills}
 Placeholder for climate overview.
 
 ## Mean annual precipitation
@@ -191,7 +191,7 @@ Placeholder for climate overview.
 #### Evapotranspiration		
 ## Biome
 #### TRR = tropical rainforest, TRS = tropical seasonal forest (savanna), TMR = temperate rain forest, TMS = temperate seasonal forest, WDS = woodland/shrubland, DES = deserts, BOT = boreal-tundra		
-# Database {.tabset}
+# Database {.tabset .tabset-pills}
 Placeholder for database overview.
 
 ## Reference 
