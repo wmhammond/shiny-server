@@ -1517,6 +1517,13 @@ div.tocify {
 <!-- ```{r setup, include=FALSE} -->
 <!-- knitr::opts_chunk$set(echo = FALSE) -->
 <!-- ``` -->
+<style>
+@media screen and (max-width: 600px) {
+  #sidebar {
+    display: none;
+  }
+}
+</style>
 <div id="hydraulic-traits" class="section level1 tabset tabset-pills">
 <h1>Hydraulic Traits</h1>
 <p>Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve:</p>
@@ -2028,7 +2035,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
