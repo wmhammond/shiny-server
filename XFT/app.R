@@ -78,25 +78,25 @@ share <- list(
 )
 
 shinyApp(
-    ui = shinyUI(fillPage(
-        shinyjs::useShinyjs(),
-        shinyjs::inlineCSS(appCSS),
+    ui = shinyUI(navbarPage(selected="Home Page", collapsible="TRUE", 
         title = "Xylem Functional Traits Database",
-        titlePanel(h1("Xylem Functional Traits Database"),
-                   h4("Data submission and access portal")),
-        tabsetPanel(
-          tabPanel("Home Page",
+        # titlePanel(h1("Xylem Functional Traits Database"),
+        #            h4("Data submission and access portal")),
+        
+          tabPanel("Home Page",icon=icon("home"),
                    mainPanel(tags$h4("Welcome to the Xylem Functional Traits Database portal"),
                              br(),
                              includeHTML("welcome.html"))),
-          tabPanel("Trait Definitions",
+          tabPanel("Trait Definitions",icon=icon("book"),
                    mainPanel(
                      tags$iframe(src = 'trait_definitions.html', # put .html to /www
                                  style='width:100vw;height:100vh;', 
                                  frameborder = 0, scrolling = 'auto'
                      ))),
-            tabPanel("Submit Data",
-            sidebarLayout(
+            tabPanel("Submit Data",icon=icon("upload"),
+                     shinyjs::useShinyjs(),
+                     shinyjs::inlineCSS(appCSS),
+                sidebarLayout(
                 sidebarPanel(
                     id = "form",
                     selectInput("group", labelMandatory("Group"), c("Angiosperm", "Gymnosperm")),
@@ -167,7 +167,7 @@ shinyApp(
         #     )
         #   )
             ),
-        tabPanel("Database",
+        tabPanel("Database",icon=icon("database"),
                  # sidebarLayout(
                  #   sidebarPanel(
                  #     id = "database",
@@ -176,7 +176,7 @@ shinyApp(
                      tableOutput("databasePanel"),
                      DT::dataTableOutput("database")
                    )),
-        tabPanel("Map",
+        tabPanel("Map",icon=icon("globe"),
 
                  # sidebarLayout(
                  #   sidebarPanel(
@@ -187,7 +187,7 @@ shinyApp(
                            leafletOutput("mymap", width="90vh", height = "90vh"),
                            tags$head(tags$script(src = jsfile))
                  )),
-        tabPanel("Explore",
+        tabPanel("Explore",icon=icon("bar-chart"),
                  sidebarLayout(
                    sidebarPanel(
                      id = "explore",
@@ -200,12 +200,16 @@ shinyApp(
                      plotOutput("plot2"),
                      plotOutput("plot1")
                    ))),
-        tabPanel("Citation",
+        tabPanel("Citation",icon=icon("file-text"),
                  mainPanel(tags$h4("Citation information for the database:"),
                            br(),
-                           tags$h6("Choat B., Jansen S., Brodribb T.J., Cochard H., Delzon S., Bhaskar R., Bucci S., Feild T.S., Gleason S.M., Hacke U.G., Jacobsen A.L., Lens F., Maherali H., Martinez-Vilalta J., Mayr S., Mencuccini M., Mitchell P.J., Nardini A., Pittermann J., Pratt R.B., Sperry J.S., Westoby M., Wright I.J., Zanne A. (2012) Global convergence in the vulnerability of forests to drought. Nature 491: 752-755. ")))
+                           tags$h6("Choat B., Jansen S., Brodribb T.J., Cochard H., Delzon S., Bhaskar R., Bucci S., Feild T.S., Gleason S.M., Hacke U.G., Jacobsen A.L., Lens F., Maherali H., Martinez-Vilalta J., Mayr S., Mencuccini M., Mitchell P.J., Nardini A., Pittermann J., Pratt R.B., Sperry J.S., Westoby M., Wright I.J., Zanne A. (2012) Global convergence in the vulnerability of forests to drought. Nature 491: 752-755. "))),
+        tabPanel("Contact",icon=icon("envelope"),
+                 mainPanel(tags$h4("Contact information:"),
+                           br(),
+                           HTML('<a href="mailto:william.hammond@okstate.edu">william.hammond@okstate.edu</a>')))
         
-        ))),
+        )),
     
     
     server = function(input, output, session) {
