@@ -91,7 +91,8 @@ shinyApp(
         #            h4("Data submission and access portal")),
         
           tabPanel("Home Page",icon=icon("home"),
-                   mainPanel(tags$h2("Welcome to the Xylem Functional Traits Database portal"),
+                   mainPanel(fluidPage(style = "max-height: 100vh; max-width: 100vw; overflow-y: auto;",wellPanel(tags$style("overflow:auto"),
+                             tags$h2("Welcome to the Xylem Functional Traits Database portal"),
                              tags$h4("Please select a page from the menu above (or on mobile:", icon("bars"),")."),
                              tags$h4(icon("home"),"Home Page: you are on the home page now."),
                              tags$h4(icon("book"), "Trait Definitions: a list of traits from the database, with definitions and links to helpful resources."),
@@ -101,8 +102,8 @@ shinyApp(
                              tags$h4(icon("bar-chart"), "Explore: Here you can see a historgram of all database P50 values, and select a family of plants to compare."),
                              tags$h4(icon("file-text"), "Citation: Information on how to cite this database. Also, papers citing the database will be linked here in future updates."),
                              tags$h4(icon("envelope"), "Contact: contact us."),
-                             br(),
-                             includeHTML("welcome.html"))),
+                             br()),
+                             includeHTML("welcome.html")))),
           tabPanel("Trait Definitions",icon=icon("book"),
                    mainPanel(
                      fillPage(withMathJax(
