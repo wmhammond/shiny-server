@@ -92,7 +92,7 @@ shinyApp(
         
           tabPanel("Home Page",icon=icon("home"),
                    mainPanel(tags$h2("Welcome to the Xylem Functional Traits Database portal"),
-                             tags$h3("Please select a page from the menu above."),
+                             tags$h4("Please select a page from the menu above (or on mobile:", icon("bars"),")."),
                              tags$h4(icon("home"),"Home Page: you are on the home page now."),
                              tags$h4(icon("book"), "Trait Definitions: a list of traits from the database, with definitions and links to helpful resources."),
                              tags$h4(icon("upload"), "Submit data: here you can upload data to the database. Note, it will be reviewed before it is merged with the database. As such, recently submitted data that has not yet been merged is displayed here."),
