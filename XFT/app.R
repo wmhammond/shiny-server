@@ -65,7 +65,7 @@ appCSS <-
    #header { background: #fff; border-bottom: 1px solid #ddd; margin: -20px -15px 0; padding: 15px 15px 10px; }
   "
 css <- HTML(
-  "h3{
+  "h4{
                 display: list-item;
                 list-style-type: disc;
                 list-style-position: inside;
@@ -93,14 +93,14 @@ shinyApp(
           tabPanel("Home Page",icon=icon("home"),
                    mainPanel(tags$h2("Welcome to the Xylem Functional Traits Database portal"),
                              tags$h3("Please select a page from the menu above."),
-                             tags$h3(icon("home"),"Home Page: you are on the home page now."),
-                             tags$h3(icon("book"), "Trait Definitions: a list of traits from the database, with definitions and links to helpful resources."),
-                             tags$h3(icon("upload"), "Submit data: here you can upload data to the database. Note, it will be reviewed before it is merged with the database. As such, recently submitted data that has not yet been merged is displayed here."),
-                             tags$h3(icon("database"), "Database: here you can search, filter, and download data from the database."),
-                             tags$h3(icon("globe"), "Map: an interactive map to see the geographic origin of database observations."),
-                             tags$h3(icon("bar-chart"), "Explore: Here you can see a historgram of all database P50 values, and select a family of plants to compare."),
-                             tags$h3(icon("file-text"), "Citation: Information on how to cite this database. Also, papers citing the database will be linked here in future updates."),
-                             tags$h3(icon("envelope"), "Contact: contact us."),
+                             tags$h4(icon("home"),"Home Page: you are on the home page now."),
+                             tags$h4(icon("book"), "Trait Definitions: a list of traits from the database, with definitions and links to helpful resources."),
+                             tags$h4(icon("upload"), "Submit data: here you can upload data to the database. Note, it will be reviewed before it is merged with the database. As such, recently submitted data that has not yet been merged is displayed here."),
+                             tags$h4(icon("database"), "Database: here you can search, filter, and download data from the database."),
+                             tags$h4(icon("globe"), "Map: an interactive map to see the geographic origin of database observations."),
+                             tags$h4(icon("bar-chart"), "Explore: Here you can see a historgram of all database P50 values, and select a family of plants to compare."),
+                             tags$h4(icon("file-text"), "Citation: Information on how to cite this database. Also, papers citing the database will be linked here in future updates."),
+                             tags$h4(icon("envelope"), "Contact: contact us."),
                              br(),
                              includeHTML("welcome.html"))),
           tabPanel("Trait Definitions",icon=icon("book"),
