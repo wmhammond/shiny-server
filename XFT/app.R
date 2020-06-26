@@ -89,9 +89,11 @@ shinyApp(
                              includeHTML("welcome.html"))),
           tabPanel("Trait Definitions",icon=icon("book"),
                    mainPanel(
+                     fillPage(withMathJax(
                      tags$iframe(src = 'trait_definitions.html', # put .html to /www
-                                 style='width:100vw;height:100vh;', 
+                                 style='width:98vw !important;height:100vh;',
                                  frameborder = 0, scrolling = 'auto'
+                     ))
                      ))),
             tabPanel("Submit Data",icon=icon("upload"),
                      shinyjs::useShinyjs(),
@@ -168,25 +170,18 @@ shinyApp(
         #   )
             ),
         tabPanel("Database",icon=icon("database"),
-                 # sidebarLayout(
-                 #   sidebarPanel(
-                 #     id = "database",
-                 #     textInput("testinput", "Test Input")),
                    mainPanel(width="auto",
                      tableOutput("databasePanel"),
                      DT::dataTableOutput("database")
                    )),
         tabPanel("Map",icon=icon("globe"),
-
-                 # sidebarLayout(
-                 #   sidebarPanel(
-                 #     id = "database",
-                 #     textInput("testinput", "Test Input")),
-                 mainPanel(tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
-                      #     tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
-                           leafletOutput("mymap", width="90vh", height = "90vh"),
-                           tags$head(tags$script(src = jsfile))
-                 )),
+                 sidebarLayout(
+                   sidebarPanel(tags$h4("Select a Point")),
+                 mainPanel(fillPage(
+                           tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
+                           leafletOutput("mymap", width="98vh", height = "90vh"),
+                           tags$head(tags$script(src = jsfile)))
+                 ))),
         tabPanel("Explore",icon=icon("bar-chart"),
                  sidebarLayout(
                    sidebarPanel(
@@ -305,7 +300,7 @@ shinyApp(
                                                scrollX= TRUE,
                                                scroller = TRUE,
                                                columnDefs = list(
-                                                 list(targets = c(0:7,89:181), visible = FALSE)),
+                                                 list(targets = c(0:7,89:181), visible = FALSE)), #hide these columns
                                               lengthMenu = list(c(5, 15, -1), c('5', '15', 'All')),
                                               pageLength = 15,
                                               dom ="Bfrtip",
