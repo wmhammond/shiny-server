@@ -4,57 +4,299 @@
 # date: "5/19/2020"
 output: 
   html_document:
-    theme: flatly
+    # number_sections: true 
+    # theme: flatly
     toc: true
-    toc_float: 
-      collapsed: false
-      smooth_scrool: true
-      number_sections: false
-   
+    toc_float:
+      toc_depth: 2
+      collapsed: true
+      smooth_scroll: true
+
 ---
-
-
+<!-- limit numbering depth for table of contents in chunk below -->
+```{r, results='asis', echo = F}
+toc_depth <- 2
+sel <- paste0("h",(toc_depth+1):10, collapse = " > span, ")
+cat(paste0("<style>",
+           sel, 
+           " > .header-section-number { display: none; } </style>"))
+```
 <!-- ```{r setup, include=FALSE} -->
 <!-- knitr::opts_chunk$set(echo = FALSE) -->
 <!-- ``` -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+@media screen and (max-width: 600px) {
+  #sidebar {
+    display: none;
+  }
+}
+</style>
 
 
-# Hydraulic Traits
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 18px;
+  }
+</style>
+# Taxonomy {.tabset .tabset-pills}
+###### Select a trait:
+## XFT Database 
+#### This column indicates whether the observation was included during initial database (up to 2012), the 2012-2020 update, or was uploaded via the website submission portal.
+## rowID
+#### Indicates the row number of the observation in the complete database.
+## Group
+#### Taxonomic group: Angiosperm, Gymnosperm, Pteridophyte, Lycophyte
+## Family
+#### Family of plant as reported in the paper (Capital first letter).
+## Genus
+#### Genus of plant as reported in the paper (capital first letter).
+## Species
+#### Specific epithet as reported in the paper (lower case first letter).
+## subsp/var/f/hybrid/cult
+#### Subspecies, variety, filial generation, hybrid id, cultivar, or other distinguishing characterics of the genetic orgin of the plants.
+## Cleaned family
+#### Cleaned Family based on APGIII
+## Cleaned genus
+#### Cleaned Genus based on APGIII
+## Cleaned species
+#### Cleaned Species based on APGIII
+## Cleaned binomial
+#### Cleaned binomial based on APGIII
+
+# Plant form {.tabset .tabset-pills}
+## Plant Organ
+#### Organ of the plant in which the measurements were conducted. S= stem, T= trunk, R = root, P= petiole of leaf, L = whole leaf.
+## Developmental Stage
+#### Developmental stage as described by the data's reference paper. Se = seedling, Sa = sapling, A = adult
+## Growthform
+#### Type of plant growthform. T = tree, S = shrub, L = liana, G = grass, F = forb, C = cactus
+## Natural/Greenhouse
+#### Setting of study: N = natural, G = greenhouse, C = common garden, E = experiment
+## Phanerophyte
+#### Class of mega-, meso-, micro-, or nanophanerophyte. 1 = mega, 2 = meso (<20m), 3 = micro (<10m), 4 = nanophanerophyte (<3m)
+## Height max
+#### Maximum height for this species when naturally occuring (in meters).
+## Height actual
+#### Actual height of plants in study (in meters).
+## DBH
+#### Diameter at breast height, typically 1.3-1.5m. [(Pérez-Harguindeguy *et al.* 2013)](https://doi.org/10.1071/BT12225){target="_blank"}
+## Year
+#### Collection year.
+## Month
+#### Collection month.
+## Day
+#### Collection day.
+## Hemisphere
+#### Hemisphere of collection, N = northern, S = southern.
+
+
+
+
+
+# Hydraulic Traits {.tabset .tabset-pills}
 Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve: 
 
-```{r fig.align='center',onecurve, echo=FALSE, fig.cap="Figure 1: A vulnerability curve.", out.width = '100%'}
-knitr::include_graphics("www/vulnerability_curve.png")
+## $P_{50}$ 
+#### The xylem tension at which 50% of the maximum hydraulic conductivity is lost.
+```{r fig.align='center',p50, echo=FALSE, fig.cap="A vulnerability curve with P50 circled.", out.width = '100%'}
+knitr::include_graphics("www/p50.png")
+```
+## $P_{12}$ 
+#### 
+The xylem tension at which 12% of the maximum hydraulic conductivity is lost, also referred to as the air-entry point. $P_{12}$ is defined in [(Domec and Gartner, 2001)](https://doi.org/10.1007/s004680100095){target="_blank"} as $P_{12} = \frac{2}{slope + P_{50}}$.
+```{r fig.align='center',p12, echo=FALSE, fig.cap="A vulnerability curve with P12 circled.", out.width = '100%'}
+knitr::include_graphics("www/p12.png")
 ```
 
-## P50 (MPa)
-#### the xylem tension at which 50% of the maximum hydraulic conductivity is lost
-## P12 
-#### the xylem tension at which 12% of the maximum hydraulic conductivity is lost
-## P88 (MPa)
-#### the xylem tension at which 88% of the maximum hydraulic conductivity is lost
+## $P_{88}$ 
+#### The xylem tension at which 88% of the maximum hydraulic conductivity is lost
+```{r fig.align='center',p88, echo=FALSE, fig.cap="A vulnerability curve with P88 circled.", out.width = '100%'}
+knitr::include_graphics("www/p88.png")
+```
 ## Slope
-#### Slope of vulnerability curve (% / MPa) = (88-50)/(P88-P50)
+#### 
+Slope of vulnerability curve (% / MPa). $Slope = \frac{88-12}{P_{88}-P_{12}}$ [(Domec and Gartner, 2001)](https://doi.org/10.1007/s004680100095){target="_blank"}
+```{r fig.align='center',slope, echo=FALSE, fig.cap="A vulnerability curve with P50, P88 circled, and the equation for slope.", out.width = '100%'}
+knitr::include_graphics("www/slope.png")
+```
 ## Curve
-#### E = exponential, S = sigmoidal, O = other
+#### 
+E = exponential (blue), S = sigmoidal (red), O = other
 
-```{r fig.align='center',twocurves, echo=FALSE, fig.cap="Figure 2: An s-shaped vulnerability curve (red solid line) and an r-shaped vulnerability curve (blue dashed line).", out.width = '100%'}
+```{r fig.align='center',twocurves, echo=FALSE, fig.cap="Figure 2: A sigmoidal vulnerability curve (red solid line, 'S') and an exponential vulnerability curve (blue dashed line, 'E').", out.width = '100%'}
 knitr::include_graphics("www/vc_twotypes.png")
 ```
 ## Equation
-#### W = Weibull, P = polynomial,  PW = Pammenter Vander Willigen, L = linear
-## P50 method
-#### DH = dehydration, CE = centrifuge, CA = cavitron, AD = air-injection double end, AS = air-injection single end, AE = acoustic emissions
-## Ks (kg m-1 MPa-1 s-1)
-#### stem specific conductivity = xylem conductivity per unit of cross-sectional sapwood area
-## Ks (mg m-1 MPa-1 s-1)
-#### stem specific conductivity = xylem conductivity per unit of cross-sectional sapwood area
-## KL (kg m-1 MPa-1 s-1)
-#### leaf specific conductivity = xylem conductivity per total area of leaves distal to the measured segment
-## ψp min predawn (MPa)
-#### Minimum predawn xylem pressure potential
-## ψp min midday (MPa)
-#### Minimum midday xylem pressure potential
+#### W = Weibull, P = polynomial,  PW = Pammenter & Van der Willigen, L = linear
+
+## $P_{50}$  method
+#### 
+**DH** = dehydration ([Sperry and Tyree, 1988](https://doi.org/10.1104/pp.88.3.581){target="_blank"};  [Tyree *et al.*, 1992](https://doi.org/10.1093/treephys/10.4.411){target="_blank"};  [Bréda *et al.*, 1993](https://doi.org/10.1051/forest:19930606){target="_blank"}) 
+
+**CE** = centrifuge ([Pockman *et al.*, 1995](https://doi.org/10.1038/378715a0){target="_blank"};  [Alder *et al.*, 1997](https://doi.org/10.1093/jxb/48.3.665){target="_blank"};  [Torres-Ruiz *et al.*, 1995](https://doi.org/10.1111/ppl.12185 ){target="_blank"})
+
+**CA** = cavitron (
+[Cochard *et al.*, 2005](https://doi.org/10.1111/j.1399-3054.2005.00526.x){target="_blank"};  [Torres-Ruiz *et al.*, 2017](https://doi.org/10.1111/nph.14589){target="_blank"})
+
+**AD** = air-injection double end ([Cochard *et al.*, 1992](https://doi.org/10.1051/forest:19920302){target="_blank"};  [Salleo *et al.*, 1992](https://doi.org/10.1111/j.1365-3040.1992.tb01001.x){target="_blank"})
+
+**AS** = air-injection single end ([Cochard *et al.*, 1992](https://doi.org/10.1104/pp.100.1.205){target="_blank"})
+
+**AE** = acoustic emissions([Milburn, 1966](https://www.jstor.org/stable/23365872){target="_blank"};  [Tyree  *et al.*, 1984](https://doi.org/10.1104/pp.75.4.988){target="_blank"};  [Nolf  *et al.*, 2015](https://doi.org/10.1111/nph.13476){target="_blank"})
+
+**OV** = optical vulnerability ([Brodribb *et al.*, 2017](https://doi.org/10.1104/pp.17.00552){target="_blank"};    [OpenSourceOV](http://www.opensourceov.org/))
+
+**MicroCT** = microCT ([Choat *et al.*, 2016]( https://doi.org/10.1104/pp.15.00732){target="_blank"};    [Choat *et al.*, 2010](https://doi.org/10.1111/j.1365-3040.2010.02160.x))
+
+**Pn** = pneumatic method/Pneumatron ([Pereira *et al.*, 2019](https://doi.org/10.1111/pce.13647){target="_blank"};  [Pereira *et al.*, 2016](https://doi.org/10.1111/nph.13905){target="_blank"};  [Bittencourt *et al.*, 2018](https://doi.org/10.21769/BioProtoc.3059){target="_blank"})
+
+**MRI** = magnetic resonance imaging ([Hochberg *et al.*, 2015](https://doi.org/10.1111/pce.12688){target="_blank"})
+
+## $K_s$ 
+####
+$\frac{kg}{m\;MPa\;s}$ stem specific conductivity = xylem conductivity per unit of cross-sectional sapwood area
+
+## $K_L$ 
+#### (kg m-1 MPa-1 s-1) leaf specific conductivity = xylem conductivity per total area of leaves distal to the measured segment
+## $\Psi_{min}$
+#### ψp min predawn (MPa) Minimum predawn xylem pressure potential.
+#### ψp min midday (MPa) Minimum midday xylem pressure potential.
 ## Huber value
 #### ratio of conducting xylem area per supported leaf area
-## Sapwood capacitance  (kg m-3 MPa-1)
+## Capacitance
 #### Sapwood water storage capacity (kg m-3 MPa-1)
+# Anatomy {.tabset .tabset-pills}
+Placeholder for anatomy traits overview.
+
+## Av. tracheid length (μm)
+#### only for gymnosperms and vesselless angiosperms
+## Av. vessel length (cm)
+#### only for angiosperms
+## Vessel length method
+#### vessel length method (silicon injection; air-injection; other)
+## Max vessel length
+#### (cm)	only for angiosperms
+## Av. conduit diameter
+#### (μm)	mean tangential vessel diameter for angiosperms; tangential tracheid diameter for gymnosperms
+## dh mean hydraulic diameter (μm)
+#### dh mean hydraulic diameter (μm)
+## Conduit density per mm2	
+#### Number of vessels (angiosperms) or tracheids (gymnosperms) per mm
+## Vessel grouping index
+#### Total number of vessels in a minimum of 25 vessel groups divided by the number of groups counted
+## Ac (Intervessel contact fraction)
+#### Fraction of the vessel surface area contacting another vessel (%) = perimeter of intervessel wall divided by total vessel wall perimeter
+## Pit membrane surface area
+#### (µm2)	Average pit membrane surface area - earlywood only
+## Interconduit pit size
+#### (μm)	horizontal diameter of a bordered pit at the broadest point (= pit membrane diameter) - earlywood only
+## Outer pit aperture diameter
+#### (μm)	horizontal diameter of the (outer) pit aperture at the broadest point - earlywood only
+## Aperture / Pit size
+#### Outer pit aperture diameter / interconduit pit size
+## Intervessel pit membrane thickness
+#### (nm)	intervessel pit membrane thickness
+## Torus diameter
+#### (μm)	horizontal diameter of the torus at its broadest point
+## Torus overlap
+#### (diameter of the torus - diameter of the aperture)/diameter of the torus
+## Vestures
+#### presence of small protuberances from the secondary cell wall associated with bordered pits of angiosperms
+## Fp (pit fraction)
+#### The fraction of the conduit wall occupied by interconduit pits, i.e. pit area per total conduit wall area
+## Ap (interconduit pit (membrane) area mm2)
+#### total interconduit pit (membrane) surface area [Ap = Fp x Avessel/tracheid]
+## Porosity
+#### diffuse-porosity; ring-porosity; semi-ring-porosity
+## Perforation plates
+#### Simple; scalariform; mixed (i.e. simple and scalariform)
+## Ground tissue
+#### tracheids (vasicentric, vascular or true tracheids), libriform fibres, fibres
+## Vasicentric tracheids
+#### tracheids surrounding vessels (present or absent)
+
+# Mechanical Properties {.tabset .tabset-pills}
+Placeholder for mechanical properties overview.
+
+## Modulus of rupture (MOR)
+#### Modulus of rupture (MOR)
+## Flexual stiffness (EI)
+#### Flexual stiffness (EI)
+## Modulus of elasticity (MOE)
+#### Modulus of elasticity (MOE)
+## t (μm)
+#### double intervessel or intertracheid cell wall thickness (µm)
+## Theoretical vessel implosion resistance
+#### (t/b)2; t = double intervessel or intertracheid cell wall thickness (µm); b = vessel or tracheid lumen diameter (excluding the cell wall)
+## ρ (wood specific gravity; g/cm3)
+#### oven dry mass/fresh volume [please make a note in the notes column when green mass/volume was measured]
+
+# Leaf data {.tabset .tabset-pills}
+Placeholder for leaf data overview.
+
+## SLA (specific leaf area; cm2 g-1)	
+#### specific leaf area = leaf area to mass ratio
+## Total stomata density
+#### sum of adaxial and abaxial stomatal densities (number of stomata per cm2)
+## Stomatal index
+#### [S / (E+S)] * 100, where S is the number of stomata per unit area, and E is the number of epidermal cells per same unit area
+## Gs (mol m-2 s-1)
+#### Maximum stomatal conductance
+## Gsmin (mol m-2 s-1)
+#### Minimum stomatal conductance
+## Gcut (mol m-2 s-1)
+#### Cuticular conductance
+## Phenology
+#### E = evergreen, W = winter deciduous, D = drought deciduous
+## Amax (micromol/m2/s)
+#### Photosynthetic capacity (micronol/m2/s)
+## D13C
+#### big delta 13C (per mill) for 
+## $K_{leaf_{max}}$
+#### Maximum leaf hydraulic conductance measured on a leaf (e.g., with evaporative flux method), and units:
+$\frac{mmol}{m^2\; s\; MPa}$
+
+# Location {.tabset .tabset-pills}
+Placeholder for location overview.
+
+## Location
+#### City, area, location
+## Country
+#### Country
+## Latitude
+#### Latitude
+## Longitude
+#### Longitude
+## Provenance Latitude
+#### Provenance Latitude
+## Provenance Longitude
+#### Provenance Longitude
+## Altitude
+#### Altitude (m)
+## Altitude provenance
+#### Altitude provenance (m)
+# Climate {.tabset .tabset-pills}
+Placeholder for climate overview.
+
+## Mean annual precipitation
+#### (mm)	for study area or GBIF queries for species names		
+## Av annual temperature 
+#### (C°)	for study area or GBIF queries for species names		
+## Evapotranspiration
+#### Evapotranspiration		
+## Biome
+#### TRR = tropical rainforest, TRS = tropical seasonal forest (savanna), TMR = temperate rain forest, TMS = temperate seasonal forest, WDS = woodland/shrubland, DES = deserts, BOT = boreal-tundra		
+# Database {.tabset .tabset-pills}
+Placeholder for database overview.
+
+## Reference 
+#### Reference from which data was contributed.
+## Contributor I 
+#### Name of the participant who integrated the data
+## Contributor II 
+#### Name of the participant who double-checked the data.
+## Notes
+#### Any remark made by participants regarding the data.
