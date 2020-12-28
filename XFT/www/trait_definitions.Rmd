@@ -70,9 +70,9 @@ body{ /* Normal  */
 ## Plant Organ
 #### Organ of the plant in which the measurements were conducted. S= stem, T= trunk, R = root, P= petiole of leaf, L = whole leaf.
 ## Developmental Stage
-#### Developmental stage as described by the data's reference paper. Se = seedling, Sa = sapling, A = adult
+#### Developmental stage as described by the data's reference paper. Se = seedling, Sa = sapling, A = adult R= resprout
 ## Growthform
-#### Type of plant growthform. T = tree, S = shrub, L = liana, G = grass, F = forb, C = cactus
+#### Type of plant growthform. T = tree, S = shrub, L = liana, G = grass, F = forb, C = cactus, H = hemiepiphyte
 ## Natural/Greenhouse
 #### Setting of study: N = natural, G = greenhouse, C = common garden, E = experiment
 ## Phanerophyte
