@@ -68,9 +68,9 @@ body{ /* Normal  */
 
 # Plant form {.tabset .tabset-pills}
 ## Plant Organ
-#### Organ of the plant in which the measurements were conducted. S= stem, T= trunk, R = root, P= petiole of leaf, L = whole leaf, LX = leaf xylem.
+#### Organ of the plant in which the measurements were conducted. S= stem, T= trunk, R = root, P= petiole of leaf, L = whole leaf.
 ## Developmental Stage
-#### Developmental stage as described by the data's reference paper. Se = seedling, Sa = sapling, A = adult
+#### Developmental stage as described by the data's reference paper. Se = seedling, Sa = sapling, A = adult R= resprout
 ## Growthform
 #### Type of plant growthform. T = tree, S = shrub, L = liana, G = grass, F = forb, C = cactus
 ## Natural/Greenhouse
@@ -97,7 +97,7 @@ body{ /* Normal  */
 
 
 # Hydraulic Traits {.tabset .tabset-pills}
-Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Below is a figure of a vulnerability curve: 
+Plant hydraulic traits in the xylem functional traits database are most often those derived from, or related to the vulnerability curve of a species. Vulnerability curves describe the increase in hydraulic impairment (or, decrease in conductivity) along an increasing tension gradient (more negative water potentials). Note, hydraulic traits may range widely between organs within a single species, or within species across their range, or due to particular methods used to obtain the data. Thus, we urge care and caution in analyses which ignore the metadata here for tissue, developmental stage, and methods used. Below is a figure of a vulnerability curve: 
 
 ## $P_{50}$ 
 #### The xylem tension at which 50% of the maximum hydraulic conductivity is lost.
