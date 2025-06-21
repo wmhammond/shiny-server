@@ -53,7 +53,7 @@ responsesDir <- file.path("responses")
 databaseDir <- file.path("database")
 #databaseFile <-"database.csv"
 #database_df <- read.csv(file=file.path(databaseDir, databaseFile))
-database_df <-readRDS("database.RDS")
+database_df <-readRDS("database2025.RDS")
 databaseFilename <- "XFT_cleaned_databse.csv"
 # CSS to use in the app
 appCSS <-
@@ -318,8 +318,8 @@ shinyApp(
                                                scrollY = 600,
                                                scrollX= TRUE,
                                                scroller = TRUE,
-                                               columnDefs = list(
-                                                 list(targets = c(0:7,89:181), visible = FALSE)), #hide these columns
+                                               # columnDefs = list(
+                                               #   list(targets = c(0:7,89:181), visible = FALSE)), #hide these columns
                                               lengthMenu = list(c(5, 15, -1), c('5', '15', 'All')),
                                               pageLength = 15,
                                               dom ="Bfrtip",
@@ -458,8 +458,8 @@ shinyApp(
                                list(90, 180)),maxBoundsViscosity = 1.0)) %>%
             addMiniMap(tiles = providers$Esri.WorldImagery, toggleDisplay = TRUE,
                        position = "bottomleft") %>%
-            addCircleMarkers(lng = ~Ref_lonCRU,
-                             lat = ~Ref_latCRU,
+            addCircleMarkers(lng = ~as.numeric(long),
+                             lat = ~as.numeric(lat),
                              color = "black",
                              # clusterOptions = markerClusterOptions(),
                              fillColor = "cyan",
