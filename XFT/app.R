@@ -205,7 +205,7 @@ shinyApp(
                  sidebarLayout(
                    sidebarPanel(
                      id = "explore",
-                     selectizeInput("Family", "Select family", sort(unique(database_df$Cleaned.family)), options=list(
+                     selectizeInput("Family", "Select family", sort(unique(database_df$Family)), options=list(
                                  placeholder = 'Please select an option below',
                                  onInitialize = I('function() { this.setValue(""); }'))),
                      ),
@@ -415,7 +415,7 @@ shinyApp(
           output$plot1 <- renderPlot({
             req(input$Family)
             df_plot_subset<-df_subset()
-          ggplot(df_plot_subset, aes(x=as.numeric(as.character(P50..MPa.)))) + 
+          ggplot(df_plot_subset, aes(x=as.numeric(as.character(P50)))) + 
             geom_histogram(bins=30, color='black') +
             xlim(0,-16) + 
             xlab("P50") +
@@ -424,7 +424,7 @@ shinyApp(
             theme_minimal()
           }, bg = 'transparent')
         output$plot2 <- renderPlot({
-          ggplot(database_df, aes(x=as.numeric(as.character(P50..MPa.)))) + 
+          ggplot(database_df, aes(x=as.numeric(as.character(P50)))) + 
             geom_histogram(bins=30, color='black') +
             xlim(0,-16) + 
             xlab("P50") +
