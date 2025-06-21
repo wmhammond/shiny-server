@@ -189,7 +189,7 @@ shinyApp(
             ),
         tabPanel("Database",icon=icon("database"),
                    mainPanel(width="auto",
-                             HTML('<p>This page is presently under construction. The posted database is from Choat et al. (2012), and is standing in as we test and deploy this web-based data portal. We are preparing an updated and vastly expanded database (~4,500 P50 observations, ~1,600 species) for scientific publication, and it will be posted here as an open-access resource once the paper is published. Please contact&nbsp;<a href="mailto:williamhammond@ufl.edu">williamhammond@ufl.edu</a>&nbsp;with any questions.</p>'),
+                             HTML('<p>This page is presently under construction. The posted database is built upon the original from Choat et al. (2012), and is updated for use at the 2025 PSI-NET workshop. We are preparing a publication of this vastly expanded database (~4,000 P50 observations, ~1,600 species) for scientific publication, and it will be permanently hosted here as an open-access resource once the paper is published. Please contact&nbsp;<a href="mailto:williamhammond@ufl.edu">williamhammond@ufl.edu</a>&nbsp;with any questions.</p>'),
                      tableOutput("databasePanel"),
                      DT::dataTableOutput("database")
                    )),
